@@ -569,3 +569,85 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* Section 8 — live generative music box controls */
+.lullaby-sequence {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  margin: 1.1rem 0 .35rem;
+  min-height: 2.3rem;
+}
+.lullaby-sequence span {
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  color: var(--lullaby-muted, #a8a0b6);
+  background: rgba(255,255,255,.045);
+  transition: transform .2s ease, background .2s ease, color .2s ease;
+}
+.lullaby-sequence span.active {
+  color: #25182f;
+  background: #f2c6dc;
+  transform: translateY(-3px) scale(1.12);
+  box-shadow: 0 0 18px rgba(242,198,220,.38);
+}
+.lullaby-lab-controls {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 1rem;
+  background: rgba(255,255,255,.025);
+}
+.lullaby-lab-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: .65rem;
+  min-width: 0;
+}
+.lullaby-lab-controls label > span {
+  display: flex;
+  justify-content: space-between;
+  gap: .5rem;
+  font-size: .66rem;
+  letter-spacing: .12em;
+  color: var(--lullaby-muted, #a8a0b6);
+}
+.lullaby-lab-controls label b {
+  color: var(--lullaby-text, #f4edf8);
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.lullaby-lab-controls select {
+  width: 100%;
+  min-height: 2.6rem;
+  padding: .55rem .7rem;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: .65rem;
+  color: var(--lullaby-text, #f4edf8);
+  background: #211a2a;
+  font: inherit;
+}
+.lullaby-lab-controls input[type="range"] {
+  width: 100%;
+  accent-color: #e7b4d0;
+}
+.lullaby-track-row[aria-pressed="true"] .lullaby-row-icon {
+  color: #f2c6dc;
+}
+@media (max-width: 600px) {
+  .lullaby-lab-controls { grid-template-columns: 1fr; }
+  .lullaby-sequence { gap: .35rem; }
+  .lullaby-sequence span { width: 1.55rem; height: 1.55rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lullaby-sequence span { transition: none; }
+  .lullaby-record.record-playing { animation-duration: 20s; }
+}
