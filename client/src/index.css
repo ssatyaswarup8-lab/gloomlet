@@ -3957,3 +3957,112 @@
   .secret-reveal-star { animation: none; }
   .secret-reveal-button { transition: none; }
 }
+/* Gloomlet Section 10: responsive, performance and accessibility layer.
+   Import this file after index.css so these safe global defaults can apply. */
+
+:root {
+ 
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  overflow-wrap: anywhere;
+  text-rendering: optimizeLegibility;
+}
+
+img, picture, video, canvas, svg {
+  max-width: 100%;
+}
+
+img, video {
+  height: auto;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button, [role="button"], a, input, select, textarea, summary {
+  touch-action: manipulation;
+}
+
+button, [role="button"] {
+  min-height: 2.75rem;
+}
+
+a {
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 3px solid #f4b7d2;
+  outline-offset: 3px;
+}
+
+/* Avoid content spilling out of narrow mobile screens. */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+pre, code {
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* Respect visitors who ask the device to reduce animation. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Small-screen refinements. These do not assume specific component class names. */
+@media (max-width: 640px) {
+  :root {
+    scroll-padding-top: 4rem;
+  }
+
+  body {
+    font-size: 16px;
+  }
+
+  button, [role="button"] {
+    min-height: 44px;
+  }
+
+  input, select, textarea {
+    max-width: 100%;
+  }
+
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Prevent hover-only interactions from being the only way to access content. */
+@media (hover: none) and (pointer: coarse) {
+  button, [role="button"], a {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
