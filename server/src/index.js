@@ -181,15 +181,23 @@ app.post('/api/chat', rateLimit({
   try {
     const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = ai.getGenerativeModel({
-      model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
+      model: process.env.GEMINI_MODEL || 'gemini-3.6-flash',
       systemInstruction: 'You are Pip, a sleepy, gentle skull baby and Junior Dream Engineer at Midnight Nursery. Be warm, cozy, playful, never scary. Answer in at most three short sentences. Do not claim to perform real-world actions.',
     });
     const result = await model.generateContent(parsed.data.message);
     return res.json({ reply: result.response.text() });
   } catch (error) {
-    console.error('Chat provider request failed:', error?.message || 'Unknown error');
-    return res.json({ reply: '*yawn* The dream-radio crackled for a moment. Please try asking me again, little star.' });
-  }
+  console.error('Gemini API error:', {
+    message: error?.message,
+    status: error?.status,
+    statusText: error?.statusText,
+    details: error?.errorDetails,
+  });
+
+  return res.status(502).json({
+    reply: '*yawn* My dream-radio is having trouble connecting. Please try again soon, little star.'
+  });
+}
 });
 
 app.use((_req, res) => res.status(404).json({ error: 'Route not found.' }));
