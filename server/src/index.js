@@ -181,7 +181,7 @@ app.post('/api/chat', rateLimit({
   try {
     const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = ai.getGenerativeModel({
-      model: process.env.GEMINI_MODEL || 'gemini-3.6-flash',
+      model: process.env.GEMINI_MODEL || 'gemini-3.8-flash',
       systemInstruction: 'You are Pip, a sleepy, gentle skull baby and Junior Dream Engineer at Midnight Nursery. Be warm, cozy, playful, never scary. Answer in at most three short sentences. Do not claim to perform real-world actions.',
     });
     const result = await model.generateContent(parsed.data.message);
